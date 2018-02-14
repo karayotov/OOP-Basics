@@ -1,5 +1,4 @@
-﻿
-public class Person
+﻿public class Person
 {
     int age;
     string name;
