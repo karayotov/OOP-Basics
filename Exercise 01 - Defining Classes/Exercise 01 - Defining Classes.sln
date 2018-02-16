@@ -5,9 +5,11 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01DefineАClassPerson", "01 Define a Class Person\01DefineАClassPerson.csproj", "{E51A7D25-1114-460E-8CB6-2372ED9093BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpinionPoll", "OpinionPoll\OpinionPoll.csproj", "{8637F49B-D01C-4ECB-8E84-3D0ECEC038F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpinionPoll", "OpinionPoll\OpinionPoll.csproj", "{8637F49B-D01C-4ECB-8E84-3D0ECEC038F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateModifier", "DateModifier\DateModifier.csproj", "{6400FBF1-29E7-4FD1-BA45-7348832CE79B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DateModifier", "DateModifier\DateModifier.csproj", "{6400FBF1-29E7-4FD1-BA45-7348832CE79B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyRoster", "CompanyRoster\CompanyRoster.csproj", "{AFD80DE7-4904-4FBE-B2AD-89020F467F1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{6400FBF1-29E7-4FD1-BA45-7348832CE79B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6400FBF1-29E7-4FD1-BA45-7348832CE79B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6400FBF1-29E7-4FD1-BA45-7348832CE79B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFD80DE7-4904-4FBE-B2AD-89020F467F1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFD80DE7-4904-4FBE-B2AD-89020F467F1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFD80DE7-4904-4FBE-B2AD-89020F467F1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFD80DE7-4904-4FBE-B2AD-89020F467F1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
