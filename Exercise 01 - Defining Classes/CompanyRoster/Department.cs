@@ -4,8 +4,8 @@ using System.Linq;
 public class Department
 {
     private List<Employee> employees;
-    private string departmentName;
-    private int average;
+    public string departmentName;
+    public int average;
 
     public int Average
     {
@@ -30,15 +30,14 @@ public class Department
         DepartmentName = name;
     }
 
-    public List<Employee> FillingDepartment (Employee employee, int count)
+    public Department (Employee employee, string name):this(name)
     {
-        
+
         Employees.Add(employee);
 
-        return Employees;
     }
 
-    public decimal FindAverageSalary(List<Employee> employees)
+    public decimal AverageSalaryInThisDepartment(List<Employee> employees)
     {
         decimal Average = employees.Average(a => a.Salary);
         return Average;

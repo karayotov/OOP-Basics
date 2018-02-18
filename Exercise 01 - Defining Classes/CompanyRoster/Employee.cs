@@ -4,61 +4,48 @@ using System.Text;
 
 public class Employee
 {
-    private string name, position, email;
+    private string name, position, email, department;
     private decimal salary;
     private int age;
 
+    public Employee(string nameStr, decimal salaryStr, string positionStr, string departmentStr)
+    {
+        this.name = nameStr;
+        this.salary = salaryStr;
+        this.position = positionStr;
+        this.department = departmentStr;
+    }
+
+    public Employee(string name, decimal salary, string position, string department, string email, int age)
+        :this(name, salary, position, department)
+    {
+        this.email = email;
+        this.age = age;
+    }
+
     public string Name
     {
-        get { return name; }
-        set { name = value; }
+        get { return this.name; }
     }
     public decimal Salary
     {
-        get { return salary; }
-        set { salary = value; }
+        get { return this.salary; }
+    }
+    public string Department
+    {
+        get { return this.department; }
     }
     public string Posiotion
     {
-        get { return position; }
-        set { position = value; }
+        get { return this.position; }
     }
     public string Email
     {
-        get { return email; }
-        set { email = value; }
+        get { return this.email; }
     }
     public int Age
     {
-        get { return age; }
-        set { age = value; }
-    }
-
-    public Employee(string nameStr, string salaryStr, string positionStr, string emailStr, string ageStr)
-    {
-        Name = nameStr;
-        Salary = decimal.Parse(salaryStr);
-        Posiotion = positionStr;
-        Email = EmailHere(emailStr);
-        Age = AgeHere(ageStr);
-    }
-
-    public string EmailHere(string email)
-    {
-        if (email == "")
-        {
-            return "n/a";
-        }
-        else
-        {
-            return email;
-        }
-    }
-
-    public int AgeHere(string age)
-    {
-        if (age == "") return -1;
-        else return int.Parse(age);
+        get { return this.age; }
     }
 }
 //Name  salary  position    department  email         age
