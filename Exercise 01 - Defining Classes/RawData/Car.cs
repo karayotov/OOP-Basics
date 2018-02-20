@@ -9,23 +9,39 @@ public class Car
     public Cargo CarCargo { get; set; }
     public List<Tyre> Tyres { get; set; }
 
-    public void Add(string singleCarData)
+    public Car (string singleCarData)
     {
         string[] data = singleCarData.Split();
 
         Model = data[0];
         CarEngine = new Engine(int.Parse(data[1]), int.Parse(data[2]));
         CarCargo = new Cargo(int.Parse(data[3]), data[4]);
-
+        Tyres = AddTyres(data);
     }
 
+    public List<Tyre> AddTyres(string[] data)
+    {
+        List<Tyre> tyres = new List<Tyre>();
+
+        for (int dataIndex = 5; dataIndex < data.Length; dataIndex+=2)
+        {
+            tyres.Add(new Tyre(double.Parse(data[dataIndex]), int.Parse(data[dataIndex + 1])));
+        }
+
+        return tyres;
+    }
+
+    public void PrintCar()
+    {
+        Console.WriteLine($"{Model}");
+    }
 }
 //CarColection
     //Car
-    //<Model>
-    //Engine
+        //<Model>
+        //Engine
 
-    //Cargo
+        //Cargo
 
-    //TyreColection(List)
+        //TyreColection(List)
         //Tyre * 4
