@@ -1,8 +1,9 @@
 ﻿using System;
 
-class RawData
+class CarData
 {
     static void Main(string[] args)
     {
+        
     }
 }
