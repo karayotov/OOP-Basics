@@ -33,10 +33,10 @@ class RectangularIntersection
         Rectangle firstRec = ExtractRectangular(firstShape, shapes);
         Rectangle secondRec = ExtractRectangular(secondShape, shapes);
 
-        bool firstXCase = firstRec.TopLeftPoint.X < secondRec.BottomRightPoint.X;
-        bool secondXCase = firstRec.BottomRightPoint.X > secondRec.TopLeftPoint.X;
-        bool firstYCase = firstRec.TopLeftPoint.Y > secondRec.BottomRightPoint.Y;
-        bool secondYCase = firstRec.BottomRightPoint.Y < secondRec.TopLeftPoint.Y;
+        bool firstXCase = firstRec.TopLeftPoint.X <= secondRec.BottomRightPoint.X;
+        bool secondXCase = firstRec.BottomRightPoint.X >= secondRec.TopLeftPoint.X;
+        bool firstYCase = firstRec.TopLeftPoint.Y >= secondRec.BottomRightPoint.Y;
+        bool secondYCase = firstRec.BottomRightPoint.Y <= secondRec.TopLeftPoint.Y;
 
                                         //RectA.X1 < RectB.X2
                                         //RectA.X2 > RectB.X1
