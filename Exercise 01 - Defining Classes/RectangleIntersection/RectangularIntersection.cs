@@ -33,7 +33,24 @@ class RectangularIntersection
         Rectangle firstRec = ExtractRectangular(firstShape, shapes);
         Rectangle secondRec = ExtractRectangular(secondShape, shapes);
 
-        bool firstCase = 
+        bool firstXCase = firstRec.TopLeftPoint.X < secondRec.BottomRightPoint.X;
+        bool secondXCase = firstRec.BottomRightPoint.X > secondRec.TopLeftPoint.X;
+        bool firstYCase = firstRec.TopLeftPoint.Y > secondRec.BottomRightPoint.Y;
+        bool secondYCase = firstRec.BottomRightPoint.Y < secondRec.TopLeftPoint.Y;
+
+                                        //RectA.X1 < RectB.X2
+                                        //RectA.X2 > RectB.X1
+                                        //RectA.Y1 > RectB.Y2
+                                        //RectA.Y2 < RectB.Y1
+
+        if (firstXCase && secondXCase && firstYCase && secondYCase)
+        {
+            Console.WriteLine("false");
+        }
+        else
+        {
+            Console.WriteLine("true");
+        }
     }
 
     private static Rectangle ExtractRectangular(string comparingName, List<Rectangle> shapes)
@@ -59,12 +76,12 @@ class RectangularIntersection
             string[] data = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).ToArray();
 
             string name = data[0];
-            int x = int.Parse(data[3]);
-            int y = int.Parse(data[4]);
-            int width = int.Parse(data[1]);
-            int height = int.Parse(data[2]);
-            int bottomX = width + x;
-            int bottomY = height + y;
+            double x = double.Parse(data[3]);
+            double y = double.Parse(data[4]);
+            double width = double.Parse(data[1]);
+            double height = double.Parse(data[2]);
+            double bottomX = width + x;
+            double bottomY = height + y;
 
             Coordinates topLeft = new Coordinates(x, y);
             Coordinates bottomRight = new Coordinates(topLeft, bottomX, bottomY);

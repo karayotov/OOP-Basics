@@ -2,15 +2,15 @@
 
 public class Coordinates
 {
-    public int X { get; set; }
-    public int Y { get; set; }
+    public double X { get; set; }
+    public double Y { get; set; }
 
-    public Coordinates(int x, int y)
+    public Coordinates(double x, double y)
     {
         X = x;
         Y = y;
     }
-    public Coordinates(Coordinates topLeft, int width, int height)
+    public Coordinates(Coordinates topLeft, double width, double height)
     {
         X = topLeft.X + width;
         Y = topLeft.Y + height;
