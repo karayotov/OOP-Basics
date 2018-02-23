@@ -18,23 +18,24 @@ public class Colecting
         Console.WriteLine(ColectingHearths(galaxy));
     }
 
-    private static string ColectingHearths(Space galaxy)
+    private static long ColectingHearths(Space galaxy)
     {
         string loverData;
         long sum = 0L;
 
         Coordinates coordinates = new Coordinates();
         Evil evil = new Evil();
-        Lover ivo = new Lover(sum);
+        Lover ivo = new Lover();
 
         while ((loverData = Console.ReadLine()) != "Let the Force be with you")
         {
             evil = new Evil(new Coordinates(Console.ReadLine()));
-            evil.RemoveStars(galaxy.Matrix);
+            evil.RemoveStars(galaxy);
 
-            ivo = new Lover(new Coordinates(loverData));
-            ivo.ColectingStars(galaxy.Matrix, ivo.StarsColected);
+            ivo = new Lover(sum, new Coordinates(loverData));
+            ivo.ColectingStars(galaxy, ivo.StarsColected);
+            sum = ivo.StarsColected;     //<----------------------този ред липсваше!!! 
         }
-        return ivo.StarsColected.ToString();
+        return ivo.StarsColected;
     }
 }

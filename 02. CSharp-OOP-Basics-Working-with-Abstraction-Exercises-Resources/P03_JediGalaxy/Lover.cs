@@ -8,19 +8,19 @@ public class Lover
 
     public long StarsColected { get => starsColected; set => starsColected = value; }
     internal Coordinates Location { get => location; set => location = value; }
+    public Lover()
+    {
 
-    public Lover(long stars)
+    }
+    public Lover(long stars, Coordinates loc)
     {
         Location = location;
         StarsColected = stars;
-    }
-    public Lover(Coordinates loc)
-    {
         Location = loc;
     }
-    public void ColectingStars(int [,] matrix, long sum)
+    public void ColectingStars(Space galaxy, long sum)
     {
-
+        var matrix = galaxy.Matrix;
         while (Location.Row >= 0 && Location.Col < matrix.GetLength(1))
         {
             if (Location.Row >= 0 && Location.Row < matrix.GetLength(0) && Location.Col >= 0 && Location.Col < matrix.GetLength(1))
@@ -31,9 +31,6 @@ public class Lover
             Location.Col++;
             Location.Row--;
         }
-
         StarsColected = sum;
     }
-
-
 }

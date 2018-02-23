@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 public class Coordinates
 {
@@ -12,8 +10,6 @@ public class Coordinates
     public int Col { get => col; set => col = value; }
     public Coordinates()
     {
-        Row = row;
-        Col = col;
     }
     public Coordinates(string input)
     {

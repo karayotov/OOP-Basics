@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-public class Space
+﻿public class Space
 {
     int[,] matrix;
 
@@ -12,15 +8,16 @@ public class Space
     {
         int value = 0;
 
-        matrix = new int[rowCount, colCount];
+        var m = new int[rowCount, colCount];
 
         for (int rowIndex = 0; rowIndex < rowCount; rowIndex++)
         {
             for (int colIndex = 0; colIndex < colCount; colIndex++)
             {
-                matrix[rowIndex, colIndex] = value++;
+                m[rowIndex, colIndex] = value++;
             }
         }
-        Matrix = matrix;
+       
+        this.Matrix = m;
     }
 }
