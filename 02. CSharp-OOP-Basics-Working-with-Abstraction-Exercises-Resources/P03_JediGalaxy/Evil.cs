@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-class Evil
+public class Evil
 {
     Coordinates location;
     Coordinates Location { get => location; set => location = value; }
@@ -31,12 +31,4 @@ class Evil
         
         return matrix;
     }
-}//while (row >= 0 && col >= 0)
- //{
- //    if (row >= 0 && row < matrix.GetLength(0) && col >= 0 && col < matrix.GetLength(1))
- //    {
- //        matrix[row, col] = 0;
- //    }
- //    row--;
- //    col--;
- //}
+}
