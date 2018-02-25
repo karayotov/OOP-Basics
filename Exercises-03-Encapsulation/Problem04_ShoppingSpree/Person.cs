@@ -5,6 +5,7 @@ public class Person
 {
     private const int EMPTY_BAG = 0;
     private const string EMPTY = "";
+    private const string WHITE_SPACE = " ";
     private const decimal MIN_VALUE = 0;
     private string name;
     private decimal money;
@@ -16,7 +17,7 @@ public class Person
         get { return name; }
         set
         {
-            if (value == EMPTY)
+            if (value == EMPTY || value == WHITE_SPACE || value == null)
             {
                 throw new ArgumentException($"Name cannot be empty");
             }
