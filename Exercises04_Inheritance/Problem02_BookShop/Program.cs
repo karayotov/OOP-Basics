@@ -9,12 +9,12 @@ namespace Problem02_BookShop
         {
             try
             {
-                string outhor = Console.ReadLine();
+                string author = Console.ReadLine();
                 string title = Console.ReadLine();
                 decimal price = decimal.Parse(Console.ReadLine());
 
-                Book book = new Book(outhor, title, price);
-                GoldenEditionBook goldenEditionBook = new GoldenEditionBook(outhor, title, price);
+                Book book = new Book(author, title, price);
+                GoldenEditionBook goldenEditionBook = new GoldenEditionBook(author, title, price);
 
                 Console.WriteLine(book + Environment.NewLine);
                 Console.WriteLine(goldenEditionBook);

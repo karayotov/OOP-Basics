@@ -10,14 +10,14 @@ public class Book
     private decimal price;
 
 
-    public Book(string outhor, string title, decimal price)
+    public Book(string author, string title, decimal price)
     {
-        Outhor = outhor;
+        Author = author;
         Title = title;
         Price = price;
     }
 
-    public virtual string Outhor
+    public virtual string Author
     {
         get { return outhor; }
         protected set
@@ -69,10 +69,9 @@ public class Book
             .Append(Environment.NewLine)
             .Append("Title: ").Append(Title)
             .Append(Environment.NewLine)
-            .Append("Outhor: ").Append(Outhor)
+            .Append("Author: ").Append(Author)
             .Append(Environment.NewLine)
-            .Append(String.Format("Price: {0:f2}", Price))
-            .Append(Environment.NewLine);
+            .Append(String.Format("Price: {0:f2}", Price));
 
         return stringBuilder.ToString();
     }
