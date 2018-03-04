@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Problem07_FoodShortage
+namespace Problem08_MilitaryElite
 {
     class Program
     {
