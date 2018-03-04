@@ -3,49 +3,73 @@ using System.Collections.Generic;
 
 public class Program
 {
-    public static List<ICitizen> citizens = new List<ICitizen>();
+    public static List<IBirthable> creatures = new List<IBirthable>();
     static void Main(string[] args)
     {
         string readLine;
 
         while ((readLine = Console.ReadLine()) != "End")
         {
-            ICitizen citizen;
+            IBirthable creature;
 
-            string[] citizenData = readLine.Split();
-            if (citizenData.Length == 3)
+            string[] creatureData = readLine.Split();
+            if (creatureData.Length == 5)
             {
-                citizen = new Human(citizenData[0], citizenData[1], citizenData[2]);
+                creature = new Human(creatureData[1], creatureData[2], creatureData[3], creatureData[4]);
+            }
+            else if (creatureData.Length == 3 && ContainsDate(creatureData))
+            {
+                creature = new Pet(creatureData[1], creatureData[2]);
             }
             else
             {
-                citizen = new Robot(citizenData[0], citizenData[1]);
+                continue; //Passing robots data
             }
 
-            citizens.Add(citizen);
-
+            creatures.Add(creature);
         }
-        string idValidator = Console.ReadLine();
-        foreach (var citizen in citizens)
+
+        string year = Console.ReadLine();
+
+        PrintCorespondingDates(year);
+       
+        //AfterprintValidation(PrintCorespondingDates(year));
+    }
+
+    private static bool ContainsDate(string[] CreatureData)
+    {
+        int length = CreatureData[2].Split("/").Length;
+
+        if (length == 3)
         {
-            try
-            {
-                ValidateID(citizen, idValidator);
-            }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(citizen.Id);
-            }
+            return true;
+        }
+
+        return false;
+    }
+
+    public static void AfterprintValidation(bool datesPrinted)
+    {
+        if (datesPrinted == false && creatures.Count == 0)
+        {
+            Console.WriteLine("<empty output>");
         }
     }
 
-    public static void ValidateID(ICitizen citizen, string idValidator)
+    private static bool PrintCorespondingDates(string year)
     {
-        string idForCheck = citizen.Id.Substring(citizen.Id.Length - idValidator.Length);
+        bool dateFound = false;
 
-        if (idForCheck == idValidator)
+        foreach (var creature in creatures)
         {
-            throw new ArgumentException("this is fake Id");
+            string extractedYear = creature.Birthdate.Split("/")[2];
+
+            if (extractedYear == year)
+            {
+                Console.WriteLine(creature.Birthdate);
+                dateFound = true;
+            }
         }
+        return dateFound;
     }
 }

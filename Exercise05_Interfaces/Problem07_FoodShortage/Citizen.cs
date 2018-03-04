@@ -1,9 +1,18 @@
-﻿public class Human : ICitizen
+﻿public class Citizen : ICitizen, IBuyer
 {
+    private const int BOUGHT_FOOD = 5;
     private string name;
     private string age;
     private string id;
     private string birtdate;
+    private long food;
+    public void BuyFood() { Food += BOUGHT_FOOD; }
+
+    public long Food
+    {
+        get { return food; }
+        set { food = value; }
+    }
 
     public string Name
     {
@@ -28,7 +37,7 @@
         get { return birtdate; }
         set { birtdate = value; }
     }
-    public Human(string name, string age, string id, string birthdate)
+    public Citizen(string name, string age, string id, string birthdate)
     {
         Name = name;
         Age = age;

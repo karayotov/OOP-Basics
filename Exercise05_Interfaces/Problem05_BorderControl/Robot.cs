@@ -2,6 +2,7 @@
 {
     private string id;
     private string name;
+    private string birtdate;
 
     public string Name
     {
@@ -13,6 +14,12 @@
     {
         get { return id; }
         set { id = value; }
+    }
+
+    public string Birthdate
+    {
+        get { return birtdate; }
+        set { birtdate = value; }
     }
 
     public Robot(string model, string id)
