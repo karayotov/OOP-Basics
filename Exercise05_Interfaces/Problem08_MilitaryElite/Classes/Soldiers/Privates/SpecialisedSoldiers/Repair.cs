@@ -1,11 +1,8 @@
-﻿using Problem08_MilitaryElite.Classes.Soldiers.Privates.SpecialisedSoldiers;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Problem08_MilitaryElite.Interfaces.ISoldierFolder.IPrivateFolder.ISpecialisedSoldiersFolder;
 
 namespace Problem08_MilitaryElite
 {
-    public class Repairs
+    public class Repair : IRepair
     {
         private string part;
         private int hoursWorked;
@@ -21,6 +18,10 @@ namespace Problem08_MilitaryElite
             get { return part; }
             set { part = value; }
         }
-
+        public Repair(string part, int hoursWorked)
+        {
+            Part = part;
+            HoursWorked = hoursWorked;
+        }
     }
 }

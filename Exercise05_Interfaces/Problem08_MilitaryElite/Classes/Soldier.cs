@@ -28,6 +28,11 @@ namespace Problem08_MilitaryElite
             get { return id; }
             set { id = value; }
         }
-
+        public Soldier(string id, string firstName, string lastName)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+        }
     }
 }

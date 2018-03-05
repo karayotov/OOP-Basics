@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Problem08_MilitaryElite.Interfaces.ISoldierFolder
 {
-    public interface IPrivate
+    public interface IPrivate : ISoldier
     {
         double Salary { get; }
     }

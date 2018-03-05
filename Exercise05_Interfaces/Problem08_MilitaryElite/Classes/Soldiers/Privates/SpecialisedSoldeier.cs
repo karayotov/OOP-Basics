@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Problem08_MilitaryElite.Interfaces.ISoldierFolder.IPrivateFolder;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Problem08_MilitaryElite
 {
-    public class SpecialisedSoldeier
+    public class SpecialisedSoldeier : Private, ISpecialisedSoldier
     {
         private const string AIRFORCES = "Airforces";
         private const string MARINES = "Marines";
@@ -16,12 +17,17 @@ namespace Problem08_MilitaryElite
             get { return corps; }
             set
             {
-                if (value != AIRFORCES || value != MARINES)
+                if (value != AIRFORCES && value != MARINES)
                 {
                     throw new ArgumentException($"{AIRFORCES} or {MARINES} corps allowed");
                 }
                 corps = value;
             }
+        }
+        public SpecialisedSoldeier(string id, string firstName, string lastName, double salary, string corps) 
+            : base(id, firstName, lastName, salary)
+        {
+            Corps = corps;
         }
 
     }

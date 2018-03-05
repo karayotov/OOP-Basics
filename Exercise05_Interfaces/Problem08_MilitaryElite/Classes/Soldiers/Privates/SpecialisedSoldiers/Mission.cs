@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Problem08_MilitaryElite.Interfaces.ISoldierFolder.IPrivateFolder.ISpecialisedSoldiersFolder;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Problem08_MilitaryElite.Classes.Soldiers.Privates.SpecialisedSoldiers
 {
-    public class Mission
+    public class Mission : IMission
     {
         private const string IN_PROGRESS = "inProgress";
-        private const string FINISHED = "Finished";
+        private const string FINISHED = "finished";
         private string codeName;
         private string state;
 
@@ -16,7 +17,7 @@ namespace Problem08_MilitaryElite.Classes.Soldiers.Privates.SpecialisedSoldiers
             get { return state; }
             set
             {
-                if (value != IN_PROGRESS || value != FINISHED) //----> inProgress only, use CompleteMission() for setting as "Finished" ?
+                if (value != IN_PROGRESS && value != FINISHED) //----> inProgress only, use CompleteMission() for setting as "Finished" ?
                 {
                     throw new ArgumentException("Invalid mission state!");
                 }
@@ -28,6 +29,12 @@ namespace Problem08_MilitaryElite.Classes.Soldiers.Privates.SpecialisedSoldiers
         {
             get { return codeName; }
             set { codeName = value; }
+        }
+
+        public Mission(string codeName, string state)
+        {
+            CodeName = codeName;
+            State = state;
         }
         public void CompleteMission()
         {
