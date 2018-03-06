@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Problem08_MilitaryElite
 {
-    public class SpecialisedSoldeier : Private, ISpecialisedSoldier
+    public abstract class SpecialisedSoldeier : Private, ISpecialisedSoldier
     {
         private const string AIRFORCES = "Airforces";
         private const string MARINES = "Marines";
@@ -28,6 +28,15 @@ namespace Problem08_MilitaryElite
             : base(id, firstName, lastName, salary)
         {
             Corps = corps;
+        }
+
+        public override string ToString()
+        {
+            var result =  base.ToString();
+
+            result += $"neshto ";
+
+            return result;
         }
 
     }

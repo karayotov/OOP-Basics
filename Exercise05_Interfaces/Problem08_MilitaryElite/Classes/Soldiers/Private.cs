@@ -18,6 +18,12 @@ namespace Problem08_MilitaryElite
         {
             Salary = salary;
         }
+
+        public override string ToString()
+        {
+            var result = $"Name: {this.FirstName} { this.LastName}";
+            return result;
+        }
     }
 }
 //•	Private: “Private <id> <firstName> <lastName> <salary>”

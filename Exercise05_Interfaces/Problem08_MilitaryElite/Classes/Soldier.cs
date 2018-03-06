@@ -34,5 +34,6 @@ namespace Problem08_MilitaryElite
             FirstName = firstName;
             LastName = lastName;
         }
+        
     }
 }
