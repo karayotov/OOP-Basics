@@ -8,7 +8,7 @@ namespace Forum.Data
     {
         static void Main(string[] args)
         {
-            List<int> ids = new List<int>
+            ICollection<int> ids = new List<int>
             {
                 { 213}, { 12331321}, { 12321}, { 1323}, { 31}
             };
@@ -17,6 +17,7 @@ namespace Forum.Data
             fd.Users.Add(new User(1232321, "Pesho", "2345432", ids));
 
             fd.SaveChanges();
+
         }
     }
 }
