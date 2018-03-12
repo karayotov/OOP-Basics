@@ -13,7 +13,7 @@ namespace Forum.Models
         private int authorId;
         private ICollection<int> replyIds;
 
-        public Post(int id, string title, string content, int categoryid, int authorId, IEnumerable<int> replyIds)
+        public Post(int id, string title, string content, int categoryid, int authorId, ICollection<int> replyIds)
         {
             this.Id = id;
             this.Title = title;
@@ -23,41 +23,17 @@ namespace Forum.Models
             this.ReplyIds = new List<int>(replyIds);
         }
 
-        public ICollection<int> ReplyIds
-        {
-            get { return replyIds; }
-            set { replyIds = value; }
-        }
+        public ICollection<int> ReplyIds { get; set; }
 
-        public int AuthorId
-        {
-            get { return authorId; }
-            set { authorId = value; }
-        }
+        public int AuthorId { get; set; }
 
-        public int CategoryId
-        {
-            get { return categoryId; }
-            set { categoryId = value; }
-        }
+        public int CategoryId { get; set; }
 
-        public string Content
-        {
-            get { return content; }
-            set { content = value; }
-        }
+        public string Content { get; set; }
 
-        public string Title
-        {
-            get { return title; }
-            set { title = value; }
-        }
+        public string Title { get; set; }
 
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        public int Id { get; set; }
 
     }
 }

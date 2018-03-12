@@ -2,7 +2,8 @@
 {
     using System;
 	using System.Collections.Generic;
-	using Forum.App.Services;
+    using Forum.App.Controllers;
+    using Forum.App.Services;
 	using Forum.App.Services.Contracts;
     using Forum.App.UserInterface;
 

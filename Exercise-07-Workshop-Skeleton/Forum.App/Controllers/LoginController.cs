@@ -5,6 +5,7 @@
     using Forum.App.UserInterface.Views;
     using Forum.App.UserInterface;
     using Forum.App.Services;
+    using Forum.Data;
 
 
     public class LogInController : IController, IReadUserInfoController
@@ -59,7 +60,7 @@
 
                 case Command.LogIn:
 
-                    bool loggedIn = UserService.TryLoginUser(this.Username, this.Password);
+                    bool loggedIn = UserService.TryLogInUser(this.Username, this.Password);
                     if (loggedIn)
                     {
                         return MenuState.SuccessfulLogIn;

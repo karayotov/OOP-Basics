@@ -18,9 +18,11 @@ namespace Forum.Data
         public ForumData()
         {
             this.Users = DataMapper.LoadUsers();
-            this.Categories = DataMapper.LoadCategoryes();
+            this.Categories = DataMapper.LoadCategories();
             this.Posts = DataMapper.LoadPosts();
             this.Replies = DataMapper.LoadReplies();
+            
+
 
         }
 

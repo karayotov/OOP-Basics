@@ -1,10 +1,11 @@
-﻿namespace Forum.App.Services
+﻿namespace Forum.App.Controllers
 {
 	using Forum.App;
 	using Forum.App.Services.Contracts;
 	using Forum.App.UserInterface.Contracts;
     using Forum.App.UserInterface.Views;
     using Forum.App.UserInterface;
+    using Forum.App.Services;
 
     public class SignUpController : IController, IReadUserInfoController
     {

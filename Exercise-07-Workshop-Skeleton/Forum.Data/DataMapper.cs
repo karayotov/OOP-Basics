@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Forum.Data
 {
-    public class DataMapper 
+    public static class DataMapper 
     {
         //DATA_PATH and CONFIG_PATH are user concatenated to specify where the file should be.
 
@@ -15,7 +15,7 @@ namespace Forum.Data
         private const string CONFIG_PATH = "config.ini"; //and it stores the configuration file name
         private const string DEFAULT_CONFIG = "users=users.csv\r\ncategories=categories.csv\r\nposts=posts.csv\r\nreplies=replies.csv"; //stores the content of the configuration file.
 
-        private static Dictionary<string, string> config;
+        private static readonly Dictionary<string, string> config;
 
         private static void EnsureConfigFile(string configPath)
         {
@@ -32,53 +32,59 @@ namespace Forum.Data
                 File.Create(path).Close();
             }
         }
+
+        private static string[] ReadLines(string path)
+        {
+            EnsureFile(path);
+            string[] lines = File.ReadAllLines(path);
+            return lines;
+        }
+
         private static Dictionary<string, string> LoadConfig(string configPath)
         {
             EnsureConfigFile(configPath);
 
-            var contents = ReadLines(configPath);
+            string[] contents = ReadLines(configPath);
 
-            var config = contents
+            Dictionary<string, string> config = contents
                 .Select(l => l.Split('='))
                 .ToDictionary(t => t[0], t => DATA_PATH + t[1]);
 
             return config;
         }
 
-        private static string[] ReadLines(string path)
-        {
-            EnsureFile(path);
-            var lines = File.ReadAllLines(path);
-            return lines;
-        }
 
-        public static void WriteLines(string path, string[] lines)
+
+        private static void WriteLines(string path, string[] lines)
         {
             File.WriteAllLines(path, lines);
         }
 
-        public DataMapper()
+        static DataMapper()
         {
             Directory.CreateDirectory(DATA_PATH);
             config = LoadConfig(DATA_PATH + CONFIG_PATH);
+
         }
-
-        public static List<Category> LoadCategoryes()
+       
+        public static List<Category> LoadCategories()
         {
-            List<Category> categories = new List<Category>();
-            string[] dataLines = ReadLines(config["categories"]);
 
-            foreach (var line in dataLines)
+            string[] lines = ReadLines(config["categories"]);
+
+            List<Category> categories = new List<Category>();
+
+            foreach (var line in lines)
             {
-                string[] args = line
-                    .Split(";", StringSplitOptions.RemoveEmptyEntries);
-                int id = int.Parse(args[0]);
-                string name = args[1];
-                int[] postIds = args[2]
+                var splitLine = line
+                    .Split(";");
+
+                int[] postIds = splitLine[2]
                     .Split(',', StringSplitOptions.RemoveEmptyEntries)
                     .Select(int.Parse)
                     .ToArray();
-                Category category = new Category(id, name, postIds);
+
+                Category category = new Category(int.Parse(splitLine[0]), splitLine[1], postIds);
                 categories.Add(category);
             }
 
@@ -88,15 +94,16 @@ namespace Forum.Data
 
         public static void SaveCategories(List<Category> categories)
         {
+            const string categoryFormat = "{0};{1};{2}";
+
             List<string> lines = new List<string>();
 
             foreach (var category in categories)
             {
-                const string categoryFormat = "{0}; {1}; {2}";
                 string line = string.Format(categoryFormat,
                     category.Id,
                     category.Name,
-                    string.Join(", ", category.PostIds)           //<-----------?? Posts?
+                    string.Join(",", category.PostIds)           //<-----------?? Posts?
                     );
                 lines.Add(line);
             }
@@ -105,38 +112,42 @@ namespace Forum.Data
 
         public static List<User> LoadUsers()
         {
-            List<User> users = new List<User>();
-            string[] dataLines = ReadLines(config["users"]);
 
-            foreach (var line in dataLines)
+            string[] lines = ReadLines(config["users"]);
+
+            List<User> users = new List<User>();
+
+            foreach (var line in lines)
             {
-                string[] args = line
-                    .Split(";", StringSplitOptions.RemoveEmptyEntries);
-                int id = int.Parse(args[0]);
-                string username = args[1];
-                string password = args[2];
-                int[] postIds = args[3]
-                    .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                var splitLine = line
+                    .Split(";");
+
+                var postIds = splitLine[3]
+                    .Split(',', StringSplitOptions.RemoveEmptyEntries)
                     .Select(int.Parse)
-                    .ToArray();
-                User user = new User(id, username, password, postIds);
+                    .ToList();
+
+                User user = new User(int.Parse(splitLine[0]), splitLine[1], splitLine[2], postIds);
                 users.Add(user);
             }
+
             return users;
+
         }
 
         public static void SaveUsers(List<User> users)
         {
+            const string userFormat = "{0};{1};{2};{3}";
+
             List<string> lines = new List<string>();
 
             foreach (var user in users)
             {
-                const string userFormat = "{0}, {1}, {2}, {3}";
                 string line = string.Format(userFormat,
                     user.Id,
                     user.Username,
                     user.Password,
-                    string.Join(", ", user.PostIds)
+                    string.Join(",", user.PostIds)           //<-----------?? Posts?
                     );
                 lines.Add(line);
             }
@@ -145,21 +156,28 @@ namespace Forum.Data
 
         public static List<Post> LoadPosts()
         {
-            List<Post> posts = new List<Post>();
-            string[] dataLines = ReadLines(config["posts"]);
 
-            foreach (var line in dataLines)
+            var lines = ReadLines(config["posts"]);
+
+            List<Post> posts = new List<Post>();
+
+            foreach (var line in lines)
             {
-                string[] args = line.Split(";", StringSplitOptions.RemoveEmptyEntries);
-                int id = int.Parse(args[0]);
-                string title = args[1];
-                string content = args[2];
-                int categoryId = int.Parse(args[3]);
-                int authorId = int.Parse(args[4]);
-                int[] postsId = args[5].Split(",", StringSplitOptions.RemoveEmptyEntries)
+                var splitLine = line
+                    .Split(";");
+
+                var replyIds = splitLine[5]
+                    .Split(',', StringSplitOptions.RemoveEmptyEntries)
                     .Select(int.Parse)
-                    .ToArray();
-                Post post = new Post(id, title, content, categoryId, authorId, postsId);
+                    .ToList();
+
+                Post post = new Post(int.Parse(splitLine[0]),
+                    splitLine[1],
+                    splitLine[2],
+                    int.Parse(splitLine[3]),
+                    int.Parse(splitLine[4]),
+                    replyIds);
+
                 posts.Add(post);
             }
 
@@ -168,63 +186,67 @@ namespace Forum.Data
 
         public static void SavePosts(List<Post> posts)
         {
+            const string postFormat = "{0};{1};{2};{3};{4};{5}";
+
             List<string> lines = new List<string>();
 
             foreach (var post in posts)
             {
-                const string postsFormat = "{0}; {1}; {2}; {3}; {4}";
-                string line = string.Format(postsFormat,
+                string line = string.Format(postFormat,
                     post.Id,
                     post.Title,
                     post.Content,
                     post.CategoryId,
-                    string.Join(", ", post.ReplyIds)
+                    post.AuthorId,
+                    string.Join(",", post.ReplyIds)           //<-----------?? Posts?
                     );
                 lines.Add(line);
             }
-
+            WriteLines(config["posts"], lines.ToArray());
         }
+
 
         public static List<Reply> LoadReplies()
         {
+
+            string[] lines = ReadLines(config["replies"]);
+
             List<Reply> replies = new List<Reply>();
-            string[] datalines = ReadLines(config["replies"]);
 
-            foreach (var line in datalines)
+            foreach (var line in lines)
             {
-                string[] args = line.Split(";", StringSplitOptions.RemoveEmptyEntries);
+                var splitLine = line
+                    .Split(";");
 
-                int id = int.Parse(args[0]);
-                string content = args[1];
-                int authorId = int.Parse(args[2]);
-                int[] postIds = args[3]
-                    .Split(",", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(int.Parse)
-                    .ToArray();
-
-                Reply reply = new Reply(id, content, authorId, postIds);
+                Reply reply = new Reply(int.Parse(splitLine[0]), 
+                    splitLine[1], 
+                    int.Parse(splitLine[2]),
+                    int.Parse(splitLine[3])
+                    );
+                
                 replies.Add(reply);
             }
+
             return replies;
+
         }
 
         public static void SaveReplies(List<Reply> replies)
         {
+            const string userFormat = "{0};{1};{2};{3}";
+
             List<string> lines = new List<string>();
 
             foreach (var reply in replies)
             {
-                const string repliesFormat = "{0}, {1}, {2}, {3}";
-                string line = string.Format(repliesFormat,
+                string line = string.Format(userFormat,
                     reply.Id,
                     reply.Content,
                     reply.AuthorId,
-                    string.Join(", ", reply.PostIds)
+                    reply.PostId           //<-----------?? Posts?
                     );
-
                 lines.Add(line);
             }
-
             WriteLines(config["replies"], lines.ToArray());
         }
     }

@@ -1,7 +1,11 @@
 ﻿using System;
-
+using Forum.App.Controllers;
 using System.Linq;
 using Forum.Data;
+using Forum.Models;
+using System.Collections.Generic;
+using static Forum.App.Controllers.SignUpController;
+
 namespace Forum.App.Services
 {
     
@@ -38,7 +42,8 @@ namespace Forum.App.Services
             if (!userAlreadyExist)
             {
                 int userId = forumData.Users.LastOrDefault()?.Id + 1 ?? 1;
-                User user = new User(userId, username, password);
+                IEnumerable<int> postIds = new List<int>();
+                User user = new User(userId, username, password, postIds);
                 forumData.Users.Add(user);
                 forumData.SaveChanges();
 
@@ -48,6 +53,14 @@ namespace Forum.App.Services
             return SignUpStatus.UsernameTakenError;
         }
 
+        internal static User GetUser(int userId)
+        {
+            ForumData forumData = new ForumData();
+            User user = forumData.Users.Find(u => u.Id == userId);
+
+            return user;
+        }
+        //Having this, implement an overload to this method that takes string username as a parameter.
 
     }
 }
