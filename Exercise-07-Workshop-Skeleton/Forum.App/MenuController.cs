@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Forum.App.Controllers;
     using Forum.App.Services;
     using Forum.App.Services.Contracts;
     using Forum.App.UserInterface;
@@ -81,7 +82,7 @@
 
         internal void Back()
         {
-            if (this.State == MenuState.Categories || this.State == MenuState.ViewCategory)
+            if (this.State == MenuState.Categories || this.State == MenuState.OpenCategory)
             {
                 IPaginationController currentController = (IPaginationController)this.CurrentController;
                 currentController.CurrentPage = 0;
@@ -97,12 +98,7 @@
 
         internal void ExecuteCommand()
         {
-
-
             MenuState newState = this.CurrentController.ExecuteCommand(currentOptionIndex);
-
-
-
             switch (newState)
             {
                 case MenuState.PostAdded:
@@ -123,8 +119,8 @@
                 case MenuState.Back:
                     this.Back();
                     break;
-                case MenuState.ViewCategory:
                 case MenuState.Error:
+                case MenuState.Rerender:
                     RenderCurrentView();
                     break;
                 case MenuState.AddReplyToPost:
@@ -141,12 +137,16 @@
 
         private void AddReply()
         {
-            throw new NotImplementedException();
+
+            this.Back();
         }
 
         private void RedirectToAddReply()
         {
-            throw new NotImplementedException();
+            PostDetailsController postDetailsController = (PostDetailsController)this.CurrentController;
+            AddReplyController addReplyController = (AddReplyController)this.controllers[(int)MenuState.AddReply];
+            addReplyController.SetPostId(postDetailsController.PostId);
+            RedirectToMenu(MenuState.AddReply);
         }
 
         private void LogOut()
@@ -158,7 +158,7 @@
 
         private void SuccessfulLogin()
         {
-            var loginController = (IReadUserInfoController)this.CurrentController;
+            var loginController = (IReadUserInfoController)this.CurrentController; //<----- IReadUserInfoController
             this.Username = loginController.Username;
             this.LogInUser();
             RedirectToMenu(MenuState.Main);
@@ -166,17 +166,49 @@
 
         private void ViewPost()
         {
-            throw new NotImplementedException();
+            CategoryController categoryController = (CategoryController)this.CurrentController;
+
+            int categoryId = categoryController.CategoryId;
+
+            var posts = PostService.GetPostByCategory(categoryId).ToArray();
+
+            int postIndex = categoryController.CurrentPage * CategoryController.PAGE_OFFSET + this.CurrentControllerIndex;
+
+            var postId = posts[postIndex - 1].Id;
+
+            var postController = (PostDetailsController)this.controllers[(int)MenuState.ViewPost];
+
+            postController.SetPostId(postId);
+
+            this.RedirectToMenu(MenuState.ViewPost);
         }
 
         private void OpenCategory()
         {
-            throw new NotImplementedException();
+            CategoriesController categoriesController = (CategoriesController)this.CurrentController;
+            int categoryIndex = categoriesController.CurrentPage * CategoriesController.PAGE_OFFSET + this.currentOptionIndex;
+
+            CategoryController categoryCtrlr = (CategoryController)this.controllers[(int)MenuState.OpenCategory];
+
+            categoryCtrlr.SetCategory(categoryIndex);
+
+            this.RedirectToMenu(MenuState.OpenCategory);
         }
 
         private void AddPost()
         {
-            throw new NotImplementedException();
+            var addPostController = (AddPostController)this.CurrentController;
+            int postId = addPostController.Post.PostId;
+
+            var postViewer = (PostDetailsController)this.controllers[(int)MenuState.ViewPost];
+            postViewer.SetPostId(postId);
+
+            addPostController.ResetPost();
+
+            this.controllerHistory.Pop();
+
+            this.RedirectToMenu(MenuState.ViewPost);
+
         }
 
         private void RenderCurrentView()

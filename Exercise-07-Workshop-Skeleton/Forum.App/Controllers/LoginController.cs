@@ -16,23 +16,14 @@
             this.ResetLogin();
         }
 
-        public string Username
-        {
-            get;
-            private set;
-        }
 
-        public string Password
-        {
-            get;
-            set;
-        }
+        public string ErrorMessage { get; set; }
 
-        public bool Error
-        {
-            get;
-            set;
-        }
+        public string Username { get; private set; }
+
+        private string Password { get; set; }
+
+        private bool Error { get; set; }
 
         private enum Command
         {
@@ -61,6 +52,7 @@
                 case Command.LogIn:
 
                     bool loggedIn = UserService.TryLogInUser(this.Username, this.Password);
+
                     if (loggedIn)
                     {
                         return MenuState.SuccessfulLogIn;

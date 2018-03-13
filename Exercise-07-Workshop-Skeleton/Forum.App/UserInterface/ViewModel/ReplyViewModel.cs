@@ -15,7 +15,10 @@ namespace Forum.App.UserInterface.ViewModel
 
         public IList<string> Content { get; set; }
 
-        public ReplyViewModel() { }
+        public ReplyViewModel()
+        {
+            Content = new List<string>();
+        }
 
         public ReplyViewModel(Reply reply)
         {
@@ -28,7 +31,7 @@ namespace Forum.App.UserInterface.ViewModel
             char[] contentChars = content.ToCharArray();
             IList<string> lines = new List<string>();
 
-            for (int i = 0; i < content.Length; i += LINE_LENGTH)
+            for (int i = 0; i < contentChars.Length; i += LINE_LENGTH)
             {
                 char[] row = contentChars.Skip(i).Take(LINE_LENGTH).ToArray();
                 string rowString = String.Join("", row);

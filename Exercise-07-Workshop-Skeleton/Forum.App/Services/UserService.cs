@@ -42,8 +42,7 @@ namespace Forum.App.Services
             if (!userAlreadyExist)
             {
                 int userId = forumData.Users.LastOrDefault()?.Id + 1 ?? 1;
-                IEnumerable<int> postIds = new List<int>();
-                User user = new User(userId, username, password, postIds);
+                User user = new User(userId, username, password, new List<int>());
                 forumData.Users.Add(user);
                 forumData.SaveChanges();
 
@@ -61,6 +60,14 @@ namespace Forum.App.Services
             return user;
         }
         //Having this, implement an overload to this method that takes string username as a parameter.
+
+        public static User GetUser(string username, ForumData forumData)
+        {
+
+            var user = forumData.Users.Single(u => u.Username == username);
+            return user;
+        }
+
 
     }
 }

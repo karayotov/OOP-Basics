@@ -14,23 +14,11 @@
 
         private const string USERNAME_TAKEN_ERROR = "Username already in use!";
 
-        public string ErrorMessage
-        {
-            get;
-            set;
-        }
+        public string ErrorMessage { get; set; }
 
-        public string Username
-        {
-            get;
-            private set;
-        }
+        public string Username { get; private set; }
 
-        public string Password
-        {
-            get;
-            set;
-        }
+        public string Password { get; set; }
 
         private enum Command
         {
@@ -52,7 +40,6 @@
         public MenuState ExecuteCommand(int index)
         {
 
-
             switch((Command)index)
             {
                 case Command.ReadUsername:
@@ -64,22 +51,24 @@
                     return MenuState.Signup;
 
                 case Command.SignUp:
-
-                    SignUpStatus signUp = UserService.TrySignUpUser(this.Username, this.Password);
-                    switch (signUp)
+                    var signedUp = UserService.TrySignUpUser(this.Username, this.Password);
+                    switch (signedUp)
                     {
                         case SignUpStatus.Success:
                             return MenuState.SuccessfulLogIn;
 
                         case SignUpStatus.DetailsError:
-                            this.ErrorMessage = DETAILS_ERROR;
+                            ErrorMessage = DETAILS_ERROR;
                             return MenuState.Error;
 
                         case SignUpStatus.UsernameTakenError:
-                            this.ErrorMessage = USERNAME_TAKEN_ERROR;
+                            ErrorMessage = USERNAME_TAKEN_ERROR;
                             return MenuState.Error;
+                        default:
+                            break;
                     }
-                    break;
+
+                    return MenuState.Error;
                 case Command.Back:
                     this.ResetSignUp();
                     return MenuState.Back;
