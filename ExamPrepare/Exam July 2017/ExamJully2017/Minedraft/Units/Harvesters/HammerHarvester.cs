@@ -4,10 +4,10 @@ using System.Text;
 
 public class HammerHarvester : Harvester
 {
+    public override string Type => "Hammer";
+
     public HammerHarvester(string id, double oreoutput, double energyReqirement)
-        : base(id, oreoutput, energyReqirement)
+        : base(id, oreoutput * 3, energyReqirement * 2)
     {
-        this.OreOutput += oreoutput * 200 / 100; //increase by 200%
-        this.EnergyRequirement += energyReqirement * 100 / 100; //increase by 100%
     }
 }

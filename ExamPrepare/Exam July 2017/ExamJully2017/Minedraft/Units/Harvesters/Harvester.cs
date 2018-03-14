@@ -2,37 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 
-public abstract class Harvester
+public abstract class Harvester : Unit
 {
     private const int MIN_VALUE = 0;
     private const int MAX_VALUE = 20_000;
 
-
-    private string id;
     private double oreoutput;
     private double energyReqirement;
-
-    public string Id
-    {
-        get { return id; }
-        protected set
-        {
-            if (String.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentException("Invalid Harvester Id value!");
-            }
-            id = value;
-        }
-    }
 
     public double OreOutput
     {
         get { return oreoutput; }
-        protected set
+        private set
         {
             if (value < MIN_VALUE)
             {
-                throw new ArgumentException("Harvester's OreOutput value is  negative!");
+                throw new ArgumentException($"Harvester is not registered, because of it's OreOutput"); 
             }
             oreoutput = value;
         }
@@ -41,21 +26,26 @@ public abstract class Harvester
     public double EnergyRequirement
     {
         get { return energyReqirement; }
-        protected set
+        private set
         {
             if (value < MIN_VALUE || value > MAX_VALUE)
             {
-                throw new ArgumentException("Harvester's EnergyRequirement value is over 20000 or negative!");
+                throw new ArgumentException("Harvester is not registered, because of it's EnergyRequirement");
             }
-            oreoutput = value;
             energyReqirement = value;
         }
     }
 
-    protected Harvester(string id, double oreoutput, double energyReqirement)
+    protected Harvester(string id, double oreoutput, double energyReqirement): base(id)
     {
-        this.Id = id;
         this.OreOutput = oreoutput;
         this.EnergyRequirement = energyReqirement;
+    }
+
+    public override string ToString()
+    {
+        return $"{Type} Harvester - {Id}" + Environment.NewLine +
+            $"Ore Output: {OreOutput}" + Environment.NewLine +
+            $"Energy Requirement: { EnergyRequirement}";
     }
 }
