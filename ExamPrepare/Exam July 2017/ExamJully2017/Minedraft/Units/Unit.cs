@@ -4,7 +4,7 @@ using System.Text;
 
 public abstract class Unit
 {
-    public string Id { get; private set; }
+    public string Id { get; }
 
     public abstract string Type { get; }//при ABSTRACT наследниците са задължени да го имплементират
 

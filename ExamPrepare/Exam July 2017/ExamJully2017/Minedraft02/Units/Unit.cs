@@ -4,7 +4,9 @@ using System.Text;
 
 public abstract class Unit
 {
-    protected string Id { get; set; }
+    public string Id { get; }
+
+    public abstract string Type { get; }
 
     protected Unit(string id)
     {

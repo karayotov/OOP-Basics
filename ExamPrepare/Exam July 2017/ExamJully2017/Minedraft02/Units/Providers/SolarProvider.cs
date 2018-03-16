@@ -1,6 +1,8 @@
 ﻿public class SolarProvider : Provider
 {
-    public SolarProvider(string id, double energyOutput) : base(id)
+    public override string Type => "Solar";
+
+    public SolarProvider(string id, double energyOutput) : base(id, energyOutput)
     {
         base.EnergyOutput = energyOutput;
     }

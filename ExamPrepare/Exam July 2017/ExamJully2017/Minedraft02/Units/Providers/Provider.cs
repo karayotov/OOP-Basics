@@ -11,16 +11,27 @@ public abstract class Provider : Unit
         get { return energyOutput; }
         protected set
         {
-            if (value < 0 || value > MAX_VALUE)
+            if (value < MIN_VALUE || value > MAX_VALUE)
             {
-                throw new ArgumentException($"");
+                throw new ArgumentException("Provider is not registered, because of it's EnergyOutput");
             }
 
             energyOutput = value;
         }
     }
 
-    public Provider(string id) : base(id)
+    protected Provider(string id, double energyOutput) : base(id)
     {
+        EnergyOutput = energyOutput;
+    }
+
+    public override string ToString()
+    {
+        return $"{Type} Provider - {Id}" + Environment.NewLine +
+            $"Energy Output: {EnergyOutput}";
+
+        //return string.Format(Messages.ToStringProvider, 
+        //    this.Type, this.Id, 
+        //    Environment.NewLine, this.energyOutput);//type, id, Environment.NewLine, energyOutput
     }
 }

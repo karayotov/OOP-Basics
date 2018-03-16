@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Minedraft02
+namespace GrandPrixExam
 {
     class Program
     {
