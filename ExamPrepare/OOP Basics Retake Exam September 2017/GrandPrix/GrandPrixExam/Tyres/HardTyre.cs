@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GrandPrix.Tyres
+public class HardTyre : Tyre
 {
-    class HardTyre
-    {
-    }
+
+    public HardTyre(double hardness) : base("Hard", hardness) { }
+
 }

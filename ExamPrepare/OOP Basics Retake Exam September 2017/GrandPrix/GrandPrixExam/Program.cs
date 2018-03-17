@@ -1,12 +1,9 @@
 ﻿using System;
 
-namespace GrandPrixExam
+public class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+        
     }
 }

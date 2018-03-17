@@ -2,23 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GrandPrix.Tyres
+public class UltrasoftTyre : Tyre
 {
-    public class UltrasoftTyre : Tyre
+    private const int ULTRASOFT_BLOW_INDEX = 30;//Ultrasoft blows wen hit 30 points, not 0;
+
+
+    public UltrasoftTyre( double hardness, double grip) : base("Ultrasoft", hardness)
     {
-        public UltrasoftTyre(double hardness) : base(hardness)
-        {
-            this.Name = ULTRASOFT_NAME;
-            base.Hardness = base.Hardness + this.Grip;
-            base.Degradation = base.Degradation - ULTRASOFT_BLOW_EARLIER;
-        }
+        this.Grip = grip;
+        base.Hardness += this.Grip;
+        base.Degradation -= ULTRASOFT_BLOW_INDEX;
 
-        private const int ULTRASOFT_BLOW_INDEX = 30;
-
-        private const string ULTRASOFT_NAME = "Ultrasoft";
-
-        public string Name { get; }
-
-        public double Grip { get; set; }
     }
+
+
+    public double Grip { get; } //positiv number validation??
 }
