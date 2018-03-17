@@ -27,11 +27,11 @@ public abstract class Provider : Unit
 
     public override string ToString()
     {
-        return $"{Type} Provider - {Id}" + Environment.NewLine +
-            $"Energy Output: {EnergyOutput}";
+        //return $"{Type} Provider - {Id}" + Environment.NewLine +
+        //    $"Energy Output: {EnergyOutput}";
 
-        //return string.Format(Messages.ToStringProvider, 
-        //    this.Type, this.Id, 
-        //    Environment.NewLine, this.energyOutput);//type, id, Environment.NewLine, energyOutput
+        return string.Format(Messages.ToStringProvider,
+            this.Type, this.Id,
+            Environment.NewLine, this.energyOutput);//type, id, Environment.NewLine, energyOutput
     }
 }

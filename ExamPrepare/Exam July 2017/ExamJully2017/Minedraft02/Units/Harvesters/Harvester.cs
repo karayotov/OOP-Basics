@@ -38,7 +38,7 @@ public abstract class Harvester : Unit
         {
             if (value < MIN_VALUE || value > MAX_VALUE)
             {
-                throw new ArgumentException("Harvester is not registered, because of it's EnergyRequirement");
+                throw new ArgumentException(string.Format(Messages.InvalidHarvesterRegistration, nameof(EnergyRequirement)));
             }
             energyRequirement = value;
         }
@@ -46,14 +46,14 @@ public abstract class Harvester : Unit
 
     public override string ToString()
     {
-        return $"{Type} Harvester - {Id}" + Environment.NewLine +
-            $"Ore Output: {OreOutput}" + Environment.NewLine +
-            $"Energy Requirement: { EnergyRequirement}";
+        //return $"{Type} Harvester - {Id}" + Environment.NewLine +
+        //    $"Ore Output: {OreOutput}" + Environment.NewLine +
+        //    $"Energy Requirement: { EnergyRequirement}";
 
-        //return string.Format(Messages.ToStringHarvester, 
-        //    this.Type, this.Id, 
-        //    Environment.NewLine, this.OreOutput, 
-        //    Environment.NewLine, this.EnergyRequirement);
+        return string.Format(Messages.ToStringHarvester,
+            this.Type, this.Id,
+            Environment.NewLine, this.OreOutput,
+            Environment.NewLine, this.EnergyRequirement);
         //type, id , Environment.NewLine, oreOutput, Environment.NewLine, energyRequired
     }
 }
