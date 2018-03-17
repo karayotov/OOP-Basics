@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 public abstract class Tyre
 {
@@ -25,7 +23,7 @@ public abstract class Tyre
         get { return degradation; }
         protected set
         {
-            if (this.Degradation < BLOW_POINT)
+            if (value < BLOW_POINT)
             {
                 throw new ArgumentException(Messages.blowedTyre);
             }
@@ -34,7 +32,7 @@ public abstract class Tyre
     }
 
 
-    public void DegradateTyre()
+    public virtual void DegradateTyre()
     {
         this.Degradation -= this.Hardness;
     }
