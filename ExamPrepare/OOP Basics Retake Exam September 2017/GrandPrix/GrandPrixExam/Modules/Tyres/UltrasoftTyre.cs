@@ -10,11 +10,14 @@ public class UltrasoftTyre : Tyre
     public UltrasoftTyre( double hardness, double grip) : base("Ultrasoft", hardness)
     {
         this.Grip = grip;
-        base.Hardness += this.Grip;
-        base.Degradation -= ULTRASOFT_BLOW_INDEX;
-
+        RecalculateData();
     }
 
-
     public double Grip { get; } //positiv number validation??
+
+    private void RecalculateData()
+    {
+        base.Hardness += this.Grip;
+        base.Degradation -= ULTRASOFT_BLOW_INDEX;
+    }
 }

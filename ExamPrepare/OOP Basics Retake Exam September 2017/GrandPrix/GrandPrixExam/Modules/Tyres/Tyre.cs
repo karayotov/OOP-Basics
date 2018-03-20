@@ -4,7 +4,7 @@ public abstract class Tyre
 {
     private const int BLOW_POINT = 0;
     private const int NEW_TYRE = 100;
-    public double degradation;
+    private double degradation;
 
     protected Tyre(string name, double hardness)
     {
@@ -31,8 +31,7 @@ public abstract class Tyre
         }
     }
 
-
-    public virtual void DegradateTyre()
+    public void DegradateTyre()
     {
         this.Degradation -= this.Hardness;
     }

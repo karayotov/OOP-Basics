@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-public abstract class Car
+public class Car
 {
     private const double MAX_FUEL = 160d;
     private const int NO_FUEL = 0;
@@ -23,14 +23,14 @@ public abstract class Car
     public double FuelAmount
     {
         get { return fuelAmount; }
-        set
+        private set
         {
             if (value < NO_FUEL)
             {
                 throw new ArgumentException(Messages.emptyFuelTank);
             }
 
-            fuelAmount = Math.Min(value, MAX_FUEL);
+            this.fuelAmount = Math.Min(value, MAX_FUEL);
         }
     }
 

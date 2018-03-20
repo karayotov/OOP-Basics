@@ -15,11 +15,11 @@ public abstract class Driver
 
     public string Name { get; }
 
-    public double TotalTime { get; private set; }
+    public double TotalTime { get; set; }
 
-    public Car Car { get; private set; }
+    public Car Car { get; }
 
-    public double FuelConsumptionPerKm { get; protected set; } // Learn how to use abstract int or double
+    public double FuelConsumptionPerKm { get; } // Learn how to use abstract int or double
 
     public virtual double Speed => (this.Car.Hp + this.Car.Tyre.Degradation) / Car.FuelAmount;
 }
