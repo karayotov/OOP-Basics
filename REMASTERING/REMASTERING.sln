@@ -7,9 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Defining Classes", "Definin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P01_CreateClassPerson", "P_01-Define a class Person\P01_CreateClassPerson.csproj", "{732E07CB-A353-4C72-8663-464074246101}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P05_DateModifier", "P05_DateModifier\P05_DateModifier.csproj", "{E02AF607-9F6C-4FEE-836C-EED0A25C8FDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P05_DateModifier", "P05_DateModifier\P05_DateModifier.csproj", "{E02AF607-9F6C-4FEE-836C-EED0A25C8FDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P13_FamilyTree", "P13_FamilyTree\P13_FamilyTree.csproj", "{39ECCBC1-EAB9-4E7B-B1B9-8526C0A8F6AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P13_FamilyTree", "P13_FamilyTree\P13_FamilyTree.csproj", "{39ECCBC1-EAB9-4E7B-B1B9-8526C0A8F6AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P14CatLady", "P14CatLady\P14CatLady.csproj", "{A49AB50B-42CD-4784-B878-76A5D4BF26F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{39ECCBC1-EAB9-4E7B-B1B9-8526C0A8F6AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39ECCBC1-EAB9-4E7B-B1B9-8526C0A8F6AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39ECCBC1-EAB9-4E7B-B1B9-8526C0A8F6AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A49AB50B-42CD-4784-B878-76A5D4BF26F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A49AB50B-42CD-4784-B878-76A5D4BF26F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A49AB50B-42CD-4784-B878-76A5D4BF26F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A49AB50B-42CD-4784-B878-76A5D4BF26F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
