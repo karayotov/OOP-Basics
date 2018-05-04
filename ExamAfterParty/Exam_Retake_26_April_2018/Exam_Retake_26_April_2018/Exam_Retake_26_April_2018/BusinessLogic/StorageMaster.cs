@@ -151,7 +151,7 @@ namespace StorageMaster.BusinessLogic
 
         public string GetSummary()
         {
-            this.storages.OrderByDescending(s => s.Products.Sum(p => p.Price));
+            this.storages = this.storages.OrderByDescending(s => s.Products.Sum(p => p.Price)).ToList();
 
             StringBuilder sb = new StringBuilder();
 
@@ -184,7 +184,7 @@ namespace StorageMaster.BusinessLogic
                 sortedProducts[productName].Add(product);
             }
 
-            sortedProducts.OrderByDescending(pair => pair.Value.Count).ThenBy(pair => pair.Key);
+            sortedProducts = new Dictionary<string, List<Product>>(sortedProducts.OrderByDescending(pair => pair.Value.Count).ThenBy(pair => pair.Key));
 
             return sortedProducts;
         }

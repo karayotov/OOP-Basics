@@ -11,7 +11,11 @@ namespace StorageMaster.Factories
     {
         public Product CreateProduct(string typeName, double price)
         {
-            Type type = Assembly.GetCallingAssembly().GetTypes().SingleOrDefault(t => t.Name == typeName);
+            Type type = Assembly
+                .GetCallingAssembly()
+                .GetTypes()
+                .Where(t => typeof(Product).IsAssignableFrom(t))
+                .SingleOrDefault(t => t.Name == typeName);
 
             if (type == null)
             {

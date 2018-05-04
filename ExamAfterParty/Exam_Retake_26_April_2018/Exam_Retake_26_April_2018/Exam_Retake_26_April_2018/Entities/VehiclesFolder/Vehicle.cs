@@ -10,9 +10,9 @@ namespace StorageMaster.Entities.VehiclesFolder
     {
         private const int ZeroCountProducts = 0;
 
-        private bool isEmpty;
+        public bool IsEmpty => this.Trunk.Any() == false;
 
-        private bool isFull;
+        public bool IsFull => this.Trunk.Sum(p => p.Weight) >= this.Capacity;
 
         private Stack<Product> trunk;
 
@@ -25,61 +25,6 @@ namespace StorageMaster.Entities.VehiclesFolder
         public int Capacity { get; }
 
         public IReadOnlyCollection<Product> Trunk => this.trunk;
-
-        public bool IsFull
-        {
-            get { return isFull; }
-            set
-            {
-                if (IsFullValidation())
-                {
-                    isFull = true;
-                }
-                else
-                {
-                    isFull = false;
-                }
-            }
-        }
-
-        public bool IsEmpty
-        {
-            get { return isEmpty; }
-            set
-            {
-                if (IsEmptyValidation())
-                {
-                    isEmpty = true;
-                }
-                else
-                {
-                    isEmpty = false;
-                }
-            }
-        }
-
-        private bool IsFullValidation()
-        {
-            var sumOfProductsWeight = this.Trunk.Sum(p => p.Weight);
-
-            if (sumOfProductsWeight >= this.Capacity)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        private bool IsEmptyValidation()
-        {
-            int productsInTheTrunk = this.Trunk.Count;
-
-            if (productsInTheTrunk != ZeroCountProducts)
-            {
-                return false;
-            }
-
-            return true;
-        }
 
 
         public void LoadProduct(Product product)

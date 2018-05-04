@@ -27,8 +27,8 @@ namespace StorageMaster
 
             StringBuilder sb = new StringBuilder();
 
-            //try
-            //{
+            try
+            {
                 while ((inputLine = Console.ReadLine()) != END)
                 {
                     List<string> collection = inputLine.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -64,7 +64,7 @@ namespace StorageMaster
                             break;
 
                         case GET_STORAGE_STATUS:
-                            sb.AppendLine( storageMaster.GetStorageStatus(collection[0]));
+                            sb.AppendLine(storageMaster.GetStorageStatus(collection[0]));
                             break;
 
                         default:
@@ -74,11 +74,11 @@ namespace StorageMaster
 
                 sb.AppendLine(storageMaster.GetSummary());
 
-            //}
-            //catch (InvalidOperationException m)
-            //{
-            //    sb.AppendLine(string.Format(Messages.Error, m.Message));
-            //}
+            }
+            catch (InvalidOperationException m)
+            {
+                sb.AppendLine(string.Format(Messages.Error, m.Message));
+            }
 
             Console.WriteLine(sb.ToString());
         }

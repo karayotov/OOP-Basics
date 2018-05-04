@@ -51,32 +51,7 @@ namespace StorageMaster.Entities.StorageFolder
 
         public IReadOnlyCollection<Vehicle> Garage => this.vehicles;
 
-        public bool IsFull
-        {
-            get { return isFull; }
-            set
-            {
-                if (IsFullValidation())
-                {
-                    isFull = true;
-                }
-                else
-                {
-                    isFull = false;
-                }
-            }
-        }
-
-        private bool IsFullValidation()
-        {
-            var sumOfProductsWeight = this.Products.Sum(p => p.Weight);
-
-            if (sumOfProductsWeight >= this.Capacity)
-            {
-                return true;
-            }
-            return false;
-        }
+        public bool IsFull => this.Products.Sum(p => p.Weight) >= this.Capacity;
 
         private bool IsThereFreeGarageSlot(Storage deliveryLocation)
         {
@@ -146,7 +121,7 @@ namespace StorageMaster.Entities.StorageFolder
 
             Vehicle vehicle = this.GetVehicle(garageSlot);
 
-            while (vehicle.IsEmpty == false || this.IsFull == false)
+            while ((vehicle.IsEmpty || this.IsFull) == false)
             {
                 Product product = vehicle.Unload();
 
@@ -160,7 +135,7 @@ namespace StorageMaster.Entities.StorageFolder
 
         public override string ToString()
         {
-            return $"{this.Name}:{Environment.NewLine}Storage worth: {products.Sum(p => p.Price):F2}";
+            return $"{this.Name}:{Environment.NewLine}Storage worth: ${products.Sum(p => p.Price):F2}";
         }
     }
 }
