@@ -211,18 +211,20 @@ namespace StorageMaster.BusinessLogic
 
             string[] namesCollection = new string[storage.Garage.Count];
 
-            for (int garageSlot = 0; garageSlot < storage.Garage.Count; garageSlot++)
+            for (int slot = 0; slot < storage.Garage.Count; slot++)
             {
-                if (vehicle == null)
+                Vehicle garageSlot = storage.Garage.ElementAt(slot);
+
+                if (garageSlot == null)
                 {
                     name = Messages.emptySlot;
                 }
                 else
                 {
-                    name = vehicle.GetType().Name;
+                    name = garageSlot.GetType().Name;
                 }
 
-                namesCollection[garageSlot] = name;
+                namesCollection[slot] = name;
             }
 
             return namesCollection;

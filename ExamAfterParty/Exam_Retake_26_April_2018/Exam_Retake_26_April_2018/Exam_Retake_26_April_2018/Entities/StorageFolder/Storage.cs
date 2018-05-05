@@ -29,8 +29,6 @@ namespace StorageMaster.Entities.StorageFolder
 
             this.AddDefaultVehicles(vehicles);
 
-            this.vehicles.AddRange(vehicles);
-
         }
 
         private void AddDefaultVehicles(IEnumerable<Vehicle> vehicles)

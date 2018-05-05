@@ -11,7 +11,11 @@ namespace StorageMaster.Factories
     {
         public Storage CreateStorage(string typeName, string name)
         {
-            Type type = Assembly.GetCallingAssembly().GetTypes().SingleOrDefault(t => t.Name == typeName);
+            Type type = Assembly
+                .GetCallingAssembly()
+                .GetTypes()
+                .Where(t => typeof(Storage).IsAssignableFrom(t))
+                .SingleOrDefault(t => t.Name == typeName);
 
             if (type == null)
             {

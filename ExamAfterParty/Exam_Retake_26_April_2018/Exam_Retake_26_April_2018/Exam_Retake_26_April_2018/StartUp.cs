@@ -27,16 +27,15 @@ namespace StorageMaster
 
             StringBuilder sb = new StringBuilder();
 
-            try
+            while ((inputLine = Console.ReadLine()) != END)
             {
-                while ((inputLine = Console.ReadLine()) != END)
+                List<string> collection = inputLine.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+                string command = collection[0];
+
+                collection.RemoveAt(0);
+                try
                 {
-                    List<string> collection = inputLine.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-
-                    string command = collection[0];
-
-                    collection.RemoveAt(0);
-
                     switch (command)
                     {
                         case ADD_PRODUCT:
@@ -71,14 +70,15 @@ namespace StorageMaster
                             throw new EntryPointNotFoundException(Messages.InvalidInputCommand);
                     }
                 }
-
-                sb.AppendLine(storageMaster.GetSummary());
-
+                catch (InvalidOperationException m)
+                {
+                    sb.AppendLine(string.Format(Messages.Error, m.Message));
+                }
             }
-            catch (InvalidOperationException m)
-            {
-                sb.AppendLine(string.Format(Messages.Error, m.Message));
-            }
+
+            sb.AppendLine(storageMaster.GetSummary());
+
+
 
             Console.WriteLine(sb.ToString());
         }
