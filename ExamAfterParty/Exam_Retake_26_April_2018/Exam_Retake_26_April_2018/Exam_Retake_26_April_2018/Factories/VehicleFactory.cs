@@ -11,19 +11,24 @@ namespace StorageMaster.Factories
     {
         public Vehicle CreateVehicle(string typeName)
         {
-            Type[] Alltypes = Assembly
-                .GetCallingAssembly()
-                .GetTypes();
+            Type type = this.GetType()
+                .Assembly
+                .GetTypes()
+                .SingleOrDefault(t => typeof(Vehicle).IsAssignableFrom(t) && !t.IsAbstract && t.Name == typeName);
 
-            if (Alltypes.Any(t => typeof(Vehicle).IsAssignableFrom(t)) == false)
+            if (type == null)
             {
                 throw new InvalidOperationException(Messages.invalidVehicleType);
             }
 
-            Type setType = Alltypes
-                .SingleOrDefault(t => t.Name == typeName);
-
-            return (Vehicle)Activator.CreateInstance(setType);
+            try
+            {
+                return (Vehicle)Activator.CreateInstance(type);
+            }
+            catch (TargetInvocationException e)
+            {
+                throw e.InnerException;
+            }
         }
     }
 }

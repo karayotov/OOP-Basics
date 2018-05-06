@@ -39,31 +39,31 @@ namespace StorageMaster
                     switch (command)
                     {
                         case ADD_PRODUCT:
-                            sb.AppendLine(storageMaster.AddProduct(collection[0], double.Parse(collection[1])));
+                            sb.AppendLine(storageMaster.AddProduct(collection[0], double.Parse(collection[1])).Trim());
                             break;
 
                         case REGISTERS_TORAGE:
-                            sb.AppendLine(storageMaster.RegisterStorage(collection[0], collection[1]));
+                            sb.AppendLine(storageMaster.RegisterStorage(collection[0], collection[1]).Trim());
                             break;
 
                         case SELECT_VEHICLE:
-                            sb.AppendLine(storageMaster.SelectVehicle(collection[0], int.Parse(collection[1])));
+                            sb.AppendLine(storageMaster.SelectVehicle(collection[0], int.Parse(collection[1])).Trim());
                             break;
 
                         case LOAD_VEHICLE:
-                            sb.AppendLine(storageMaster.LoadVehicle(collection));
+                            sb.AppendLine(storageMaster.LoadVehicle(collection).Trim());
                             break;
 
                         case SEND_VEHICLE_TO:
-                            sb.AppendLine(storageMaster.SendVehicleTo(collection[0], int.Parse(collection[1]), collection[2]));
+                            sb.AppendLine(storageMaster.SendVehicleTo(collection[0], int.Parse(collection[1]), collection[2]).Trim());
                             break;
 
                         case UNLOAD_VEHICLE:
-                            sb.AppendLine(storageMaster.UnloadVehicle(collection[0], int.Parse(collection[1])));
+                            sb.AppendLine(storageMaster.UnloadVehicle(collection[0], int.Parse(collection[1])).Trim());
                             break;
 
                         case GET_STORAGE_STATUS:
-                            sb.AppendLine(storageMaster.GetStorageStatus(collection[0]));
+                            sb.AppendLine(storageMaster.GetStorageStatus(collection[0]).Trim());
                             break;
 
                         default:
@@ -72,7 +72,7 @@ namespace StorageMaster
                 }
                 catch (InvalidOperationException m)
                 {
-                    sb.AppendLine(string.Format(Messages.Error, m.Message));
+                    sb.AppendLine(string.Format(Messages.Error, m.Message).Trim());
                 }
             }
 
@@ -80,7 +80,7 @@ namespace StorageMaster
 
 
 
-            Console.WriteLine(sb.ToString());
+            Console.WriteLine(sb.ToString().TrimEnd());
         }
     }
 }

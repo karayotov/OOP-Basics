@@ -73,13 +73,16 @@ namespace StorageMaster.BusinessLogic
                 }
                 else
                 {
-                    int lastIndex = this.pool.LastIndexOf(product);
+                    if (vehicle.IsFull == false)
+                    {
+                        int lastIndex = this.pool.LastIndexOf(product);
 
-                    this.pool.RemoveAt(lastIndex);
+                        this.pool.RemoveAt(lastIndex);
 
-                    this.vehicle.LoadProduct(product);
+                        this.vehicle.LoadProduct(product);
 
-                    loadedProductsCount++;
+                        loadedProductsCount++;
+                    }
                 }
             }
 
@@ -115,7 +118,7 @@ namespace StorageMaster.BusinessLogic
 
             int unloadedProductCount = this.SelectStorage(storageName).UnloadVehicle(garageSlot);
 
-            return string.Format(Messages.unloadedVehicleReport, unloadedProductCount, productsInVehicle, storageName);
+            return string.Format(Messages.unloadedVehicleReport, unloadedProductCount, productsInVehicle, storageName).Trim();
         }
 
         public string GetStorageStatus(string storageName)
@@ -141,7 +144,7 @@ namespace StorageMaster.BusinessLogic
             string firstLine = String.Format(Messages.storageStatusProductsReport,
                 sumOfTheProductsWeight, storage.Capacity, string.Join(", ", productsInfo));
 
-            string secondLine = string.Format(Messages.storageStatusVehiclesReport, string.Join('|', vehicleNamesCollection));
+            string secondLine = string.Format(Messages.storageStatusVehiclesReport, string.Join('|', vehicleNamesCollection).Trim());
 
             sb.AppendLine(firstLine);
             sb.AppendLine(secondLine);
@@ -197,7 +200,7 @@ namespace StorageMaster.BusinessLogic
             {
                 var pair = sortedProducts.ElementAt(i);
 
-                string productInfo = pair.Key + " " + pair.Value.Count;
+                string productInfo = $"{pair.Key} ({pair.Value.Count})";
 
                 productsInfo[i] = productInfo;
             }

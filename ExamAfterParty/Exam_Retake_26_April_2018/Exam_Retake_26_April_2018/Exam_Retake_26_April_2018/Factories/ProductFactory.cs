@@ -11,19 +11,24 @@ namespace StorageMaster.Factories
     {
         public Product CreateProduct(string typeName, double price)
         {
-            Type type = Assembly
-                .GetCallingAssembly()
+            Type type = this.GetType()
+                .Assembly
                 .GetTypes()
-                .Where(t => typeof(Product).IsAssignableFrom(t))
-                .SingleOrDefault(t => t.Name == typeName);
+                .SingleOrDefault(t => typeof(Product).IsAssignableFrom(t) && !t.IsAbstract && t.Name == typeName);
 
             if (type == null)
             {
                 throw new InvalidOperationException(Messages.invalidProductType);
             }
 
-            return (Product)Activator.CreateInstance(type, price);
+            try
+            {
+                return (Product)Activator.CreateInstance(type, price);
+            }
+            catch (TargetInvocationException e)
+            {
+                throw e.InnerException;
+            }
         }
-
     }
 }

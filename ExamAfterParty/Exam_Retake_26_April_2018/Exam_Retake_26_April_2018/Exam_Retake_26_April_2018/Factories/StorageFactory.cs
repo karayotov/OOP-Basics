@@ -11,18 +11,26 @@ namespace StorageMaster.Factories
     {
         public Storage CreateStorage(string typeName, string name)
         {
-            Type type = Assembly
-                .GetCallingAssembly()
+            Type type = this.GetType()
+                .Assembly
                 .GetTypes()
-                .Where(t => typeof(Storage).IsAssignableFrom(t))
-                .SingleOrDefault(t => t.Name == typeName);
+                .SingleOrDefault(t => typeof(Storage).IsAssignableFrom(t) && !t.IsAbstract && t.Name == typeName);
 
             if (type == null)
             {
                 throw new InvalidOperationException(Messages.invalidStorageType);
             }
 
-            return (Storage)Activator.CreateInstance(type, name);
+            try
+            {
+
+                return (Storage)Activator.CreateInstance(type, name);
+            }
+            catch (TargetInvocationException e)
+            {
+
+                throw e.InnerException;
+            }
         }
     }
 }
